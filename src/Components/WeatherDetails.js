@@ -6,7 +6,7 @@ let WeatherDetails = ({lat, lon, temp, weatherCondition, sunrise, sunset, imgSrc
     {
       icon 
       && 
-      <img src={imgSrc} alt={icon} className='weather-icon'/>
+      <img src={imgSrc} alt={icon} />
     }
   </div>
   <div className='temp-degBt'>

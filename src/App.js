@@ -89,7 +89,7 @@ class App extends Component {
     let {lat, lon, temp, weatherCondition, sunrise, sunset, icon} = this.state;
     return (
       <div className="App">
-        <div className='tier tier1'>
+        <div className='tier'>
           <div className='t1-h1'>
             <h1>Weather</h1>
           </div>

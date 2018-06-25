@@ -67,13 +67,19 @@ class Forecast extends Component {
           {
             forecastData.map((forecast, i) => 
               <div key={i} className='fdiv'>
-                <div>{this.getDay(forecast.dt)}</div>
+                <div style={{color:'red'}}>{this.getDay(forecast.dt)}</div>
                 <div>{forecast.desc}</div>
-                <div>
+                <div className='icon'>
                   <img src={`http://openweathermap.org/img/w/${forecast.icon}.png`} alt={forecast.icon} />
                 </div>
-                <div>{forecast.temp_max}</div>
-                <div>{forecast.temp_min}</div>
+                <div className='max'>
+                  <div className='max1'>Max :</div>
+                  <div className='max2'>{forecast.temp_max}</div>
+                </div>
+                <div className='min'>
+                  <div className='min1'>Min :</div>
+                  <div className='min2'>{forecast.temp_min}</div>
+                </div>
               </div>)
           }
       </div>
