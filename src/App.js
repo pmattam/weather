@@ -89,29 +89,35 @@ class App extends Component {
     let {lat, lon, temp, weatherCondition, sunrise, sunset, icon} = this.state;
     return (
       <div className="App">
-        <h1>Weather</h1>
-        <WeatherDetails
-          lat={lat}
-          lon={lon}
-          temp={temp}
-          weatherCondition={weatherCondition}
-          sunrise={sunrise}
-          sunset={sunset}
-          imgSrc={imgSrc}
-          icon={icon}
-          displayCelsius={this.displayCelsius}
-          displayFarenheit={this.displayFarenheit}
-        />
-        <div>
+        <div className='tier tier1'>
+          <div className='t1-h1'>
+            <h1>Weather</h1>
+          </div>
+          <div className='t1-div'>
+            <WeatherDetails
+              lat={lat}
+              lon={lon}
+              temp={temp}
+              weatherCondition={weatherCondition}
+              sunrise={sunrise}
+              sunset={sunset}
+              imgSrc={imgSrc}
+              icon={icon}
+              displayCelsius={this.displayCelsius}
+              displayFarenheit={this.displayFarenheit}
+            />
+          </div>
+        </div>
+        <div className='tier tier2'>
           {
             !(this.state.renderForecast)
             ?
-            <button onClick={this.handleShowForecast}>5 Day Forecast</button>
+            <button className='sFBt' onClick={this.handleShowForecast}>5 Day Forecast</button>
             :
-            <button onClick={this.handleHideForecast}>Hide Forecast</button>
+            <button className='hFBt' onClick={this.handleHideForecast}>Hide Forecast</button>
           }
         </div>
-        <div>
+        <div className='tier tier3'>
           {
             this.state.renderForecast
             &&

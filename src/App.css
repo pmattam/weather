@@ -26,3 +26,147 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 } */
+
+.App {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    background-color: darkgray;
+    flex-direction: column;
+    align-items: center;
+    font-size: 25px;
+}
+
+.tier,
+.wd,
+.t1-h1 h1,
+.t1-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.t1-h1 h1 {
+    height: 80px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+}
+
+.t1-div {
+    justify-content: center;
+    height: 300px;
+    width: 300px;
+}
+
+.icon,
+.icon img {
+    display: flex;
+    height: 50px;
+    width: 50px;
+    border: 1px solid whitesmoke;
+    border-radius: 100px;
+    background-color: whitesmoke;
+}
+
+.temp-degBt,
+.temp,
+.degBt {
+    display: flex;
+    flex-direction: row;
+    width: 130px;
+    margin-top: 10px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+}
+
+.degBt button {
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    border: 1px solid whitesmoke;
+    border-radius: 4px;
+    background-color: whitesmoke;
+    font-size: 18px;
+    font-family: 'Chathura', sans-serif;
+    font-weight: bold;
+}
+
+.wDesc {
+    font-weight: bold;
+    font-size: 30px;
+    width: 300px;
+}
+
+.wSR,
+.wSS {
+    display: flex;
+    flex-direction: row;
+    width: 130px;
+    justify-content: center;
+}
+
+.wSR1,
+.wSR2,
+.wSS1,
+.wSS2 {
+    margin: 0 10px 0 10px;
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.wSR2 {
+    color: maroon;
+}
+
+.wSS2 {
+    color: darkblue;
+}
+
+.tier2 {
+    display: flex;
+    margin: 10px 0 10px 0;
+    height: 50px;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
+}
+
+.sFBt,
+.hFBt {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    width: 100px;
+    border-radius: 4px;
+    background-color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Chathura', sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.tier3 {
+    display: flex;
+    height: 300px;
+    width: 100vw;
+}
+
+.forecast,
+.fdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fdiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 150px;
+}

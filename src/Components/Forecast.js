@@ -5,7 +5,7 @@ class Forecast extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      forecastData: {}
+      forecastData: []
     };
   }
 
@@ -16,39 +16,68 @@ class Forecast extends Component {
   weatherInfo = () => {
     getWeatherForecast(this.props.lat, this.props.lon)
       .then(wData => {
-        console.log('data', wData.list);
-        console.log(wData.list[0].dt_txt.slice(0, 10));
         let apiData = {};
-        wData.list.filter(eachForecast => {
+        wData.list.forEach(eachForecast => {
           let keyDt = eachForecast.dt_txt.slice(0, 10);
-          (keyDt in apiData) ? apiData[keyDt].push(eachForecast) : apiData[keyDt] = [eachForecast];
+          if(keyDt in apiData) {
+            apiData[keyDt].weatherList.push(eachForecast);
+            if(apiData[keyDt].temp_max < eachForecast.main.temp_max) {
+              apiData[keyDt].temp_max = eachForecast.main.temp_max;
+            }
+            if(apiData[keyDt].temp_min > eachForecast.main.temp_min) {
+              apiData[keyDt].temp_min = eachForecast.main.temp_min;
+            }
+          } else {
+            apiData[keyDt] = {weatherList: [eachForecast], temp_max: eachForecast.main.temp_max, temp_min: eachForecast.main.temp_min};
+          }
+        });
+        return apiData;
+      })
+      .then(apiData => {
+        let forecastDataKeysArr = Object.keys(apiData);
+        let finalData = [];
+        forecastDataKeysArr.forEach(eachKey => {
+          apiData[eachKey].weatherList.forEach(weatherItem => {
+            if(weatherItem.main.temp_max === apiData[eachKey].temp_max) {
+              finalData.push({
+                dt: weatherItem.dt, desc: weatherItem.weather[0].description, 
+                icon: weatherItem.weather[0].icon, dt_txt: weatherItem.dt_txt, 
+                temp_max: apiData[eachKey].temp_max, temp_min: apiData[eachKey].temp_min
+              })
+            }
+          });
         });
         this.setState({
-          forecastData: apiData
+          forecastData: finalData
         })
       });
   };
 
+  getDay = (dt) => {
+    let date = new Date(parseInt(dt, 10) * 1000);
+    return date.toString().slice(0, 3);
+  };
+
   render() {
+
     let { forecastData } = this.state;
-    let forecastDataKeysArr = Object.keys(forecastData); 
-    let temp_min = 100;
-    let temp_max = 0;
-    console.log(forecastData);
-    console.log(forecastDataKeysArr);
+    
     return(
-      <div>
-        <div>
+      <div className='forecast'>       
           {
-            forecastDataKeysArr.forEach(eachKey => {
-              forecastData[eachKey].forEach(eachForecast => {
-                eachForecast.main.temp_min < temp_min ? temp_min = eachForecast.main.temp_min : temp_min
-              })
-            })
+            forecastData.map((forecast, i) => 
+              <div key={i} className='fdiv'>
+                <div>{this.getDay(forecast.dt)}</div>
+                <div>{forecast.desc}</div>
+                <div>
+                  <img src={`http://openweathermap.org/img/w/${forecast.icon}.png`} alt={forecast.icon} />
+                </div>
+                <div>{forecast.temp_max}</div>
+                <div>{forecast.temp_min}</div>
+              </div>)
           }
-        </div>
       </div>
-    )
+    );
   }
 }
 
